@@ -1,36 +1,15 @@
+import { config } from './config.js'
+import { Star } from './star.js'
+import { randVel, inXBounds, inYBounds } from './utils.js'
+
 const canvas = document.querySelector('#space')
 const ctx = canvas.getContext('2d')
 
 canvas.width=window.innerWidth
 canvas.height=window.innerHeight
 
-class Star {
-    constructor(x, y, vx, vy) {
-        this.x = x
-        this.y = y
-        this.vx = vx
-        this.vy = vy
-    }
-}
-
-function randVel() {
-    if (Math.random() >= 0.5) {
-        return Math.random()
-    } else {
-        return Math.random() * (-1)
-    }
-}
-
-function inXBounds(x) {
-    if (x < window.innerWidth && x > 0) return true 
-}
-
-function inYBounds(y) {
-    if (y < window.innerHeight && y > 0) return true 
-}
-
 function refreshCanvas() {
-    ctx.fillStyle = "#040720"
+    ctx.fillStyle = config.backgroundColor
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
@@ -38,7 +17,7 @@ function refreshCanvas() {
 function drawStar(x, y, r) {
     ctx.beginPath()
     ctx.arc(x, y, r, 0, 180)
-    ctx.fillStyle = "ghostwhite"
+    ctx.fillStyle = config.starColor
     ctx.fill()
     ctx.closePath()
 }
@@ -52,7 +31,7 @@ function drawLine(stars, origX, origY, dist) {
             ctx.beginPath()
             ctx.moveTo(origX, origY)
             ctx.lineTo(star.x, star.y)
-            ctx.strokeStyle = "blue"
+            ctx.strokeStyle = config.lineColor
             ctx.stroke()
             ctx.closePath()
         }
@@ -80,17 +59,17 @@ function drawCanvas(stars, starSize, distance) {
 const stars = []
 function main() {
     refreshCanvas()
-                    // amount
-    while (stars.length < 50) {
+                        // amount
+    while (stars.length < config.starCount) {
         const randX = Math.random() * window.innerWidth
         const randY = Math.random() * window.innerHeight
-        const randVelX = randVel() * 1.5 // speed
-        const randVelY = randVel() * 1.5
+        const randVelX = randVel() * config.starSpeed // speed
+        const randVelY = randVel() * config.starSpeed
         const star = new Star(randX, randY, randVelX, randVelY)
         stars.push(star)
     }   
             // array, size, distance 
-    drawCanvas(stars, 3, 200)
+    drawCanvas(stars, config.starSize, config.lineDistance)
 }
 
 main()
