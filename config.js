@@ -4,6 +4,6 @@ export const config = {
     starSize: 3,
     starColor: 'ghostwhite',
     backgroundColor: '#040720',
-    lineColor: "blue",
-    lineLength: 200
+    lineColor: 'blue',
+    lineDistance: 200
 }
