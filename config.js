@@ -1,56 +1,59 @@
-const customStarCount = 100
-const customStarSpeed = 1.5
-const customStarSize = 3
-const customStarColor = 'ghostwhite'
-const customBackgroundColor = '#040720'
-const customLineColor = 'blue'
-const customLineDistance = 100
+let defaultStarCount = 50;
+let defaultStarSpeed = 1.5;
+let defaultStarSize = 3;
+let defaultStarColor = 'ghostwhite';
+let defaultBackgroundColor = '#040720';
+let defaultLineColor = 'blue';
+let defaultLineDistance = 250;
 
 window.wallpaperPropertyListener = {
-    applyUserProperties: function(properties) {
+    applyUserProperties: function (properties) {
         if (properties.starcount) {
-            customStarCount = parseInt(properties.starcolor.value)
+            defaultStarCount = Math.abs(parseInt(properties.starcount.value));
         }
+
         if (properties.starspeed) {
-            customStarSpeed = parseFloat(properties.starspeed.value)
+            defaultStarSpeed = Math.abs(parseFloat(properties.starspeed.value));
         }
+
         if (properties.starsize) {
-            customStarSpeed = parseInt(properties.starsize.value)
+            defaultStarSize = Math.abs(parseInt(properties.starsize.value));
         }
+
         if (properties.starcolor) {
-            // Convert the custom color to 0 - 255 range for CSS usage
-            starColor = properties.starcolor.value.split(' ');
-            starColor = starColor.map(function(c) {
-                return Math.ceil(c * 255);
-            });
-            customStarColor = 'rgb(' + starColor + ')';
+            const c = properties.starcolor.value.split(' ').map(v => Math.round(v * 255));
+            defaultStarColor = `rgb(${c.join(',')})`;
         }
+
         if (properties.backgroundcolor) {
-            backgroundColor = properties.backgroundcolor.value.split(' ');
-            backgroundColor = backgroundColor.map(function(c) {
-                return Math.ceil(c * 255);
-            });
-            customBackgroundColor = 'rgb(' + backgroundColor + ')';
+            const c = properties.backgroundcolor.value.split(' ').map(v => Math.round(v * 255));
+            defaultBackgroundColor = `rgb(${c.join(',')})`;
         }
+
         if (properties.linecolor) {
-            lineColor = properties.linecolor.value.split(' ');
-            lineColor = lineColor.map(function(c) {
-                return Math.ceil(c * 255);
-            });
-            customBackgroundColor = 'rgb(' + lineColor + ')';
+            const c = properties.linecolor.value.split(' ').map(v => Math.round(v * 255));
+            defaultLineColor = `rgb(${c.join(',')})`;
         }
+
         if (properties.linedistance) {
-            customLineColor = parseInt(properties.linedistance.value)
+            defaultLineDistance = Math.abs(parseInt(properties.linedistance.value));
         }
-    },
+
+        const config = updateWallpaperConfig();
+    }
 };
 
-export const config = {
-    starCount: customStarCount,
-    starSpeed: customStarSpeed,
-    starSize: customStarSize,
-    starColor: customStarColor,
-    backgroundColor: customBackgroundColor,
-    lineColor: customLineColor,
-    lineDistance: customLineDistance
+export function updateWallpaperConfig() {
+    const config = {
+        starCount: defaultStarCount,
+        starSpeed: defaultStarSpeed,
+        starSize: defaultStarSize,
+        starColor: defaultStarColor,
+        backgroundColor: defaultBackgroundColor,
+        lineColor: defaultLineColor,
+        lineDistance: defaultLineDistance
+    };
+
+    console.log('Updated wallpaper config:', config);
+    return config
 }
