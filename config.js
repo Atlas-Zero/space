@@ -44,7 +44,7 @@ window.wallpaperPropertyListener = {
 };
 
 export function updateWallpaperConfig() {
-    const config = {
+    return {
         starCount: defaultStarCount,
         starSpeed: defaultStarSpeed,
         starSize: defaultStarSize,
@@ -53,7 +53,4 @@ export function updateWallpaperConfig() {
         lineColor: defaultLineColor,
         lineDistance: defaultLineDistance
     };
-
-    console.log('Updated wallpaper config:', config);
-    return config
 }
