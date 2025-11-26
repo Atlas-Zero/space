@@ -1,12 +1,14 @@
 # Space
 
-A simple background in js
-This background is now available on [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3589181971) for \
-[Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/)
+A simple background created with the power of JavaScript, HTML & CSS.
+
+This background is now available on [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3589181971) for [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/)!
 
 ## technologies
-- canvas
-- js
+- HTML
+- CSS
+- JavaScript
+- Wallpaper Engine API
 
 ## function
 - Blackblue Background
