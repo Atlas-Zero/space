@@ -7,9 +7,16 @@ export function randVel() {
 }
 
 export function inXBounds(x) {
-    if (x < window.innerWidth && x > 0) return true 
+    if (x < window.innerWidth && x > 0) return true
 }
 
 export function inYBounds(y) {
-    if (y < window.innerHeight && y > 0) return true 
+    if (y < window.innerHeight && y > 0) return true
+}
+
+export function inBoxBounds(box, x, y) {
+    let withinX = x > box.x && x < box.x + box.width
+    let withinY = y > box.y && y < box.y + box.width
+
+    return withinX && withinY
 }

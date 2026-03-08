@@ -36,39 +36,100 @@ function drawLine(stars, origX, origY, color, dist) {
     })
 }
 
-function drawUI(size, offsetPercent, foregroundColor, backgroundColor) {
+function drawUI(size, offsetPercent, clickedUI, config) {
 
     const box = {
         x: canvas.width - canvas.width * offsetPercent,
-        y: canvas.height * offsetPercent
+        y: canvas.height * offsetPercent,
+        width: size,
     }
 
-    // background
-    ctx.fillStyle = backgroundColor
-    ctx.fillRect(box.x, box.y, size, size)
+    if (clickedUI) {
 
-    // foreground
-    ctx.beginPath()
-    ctx.moveTo(box.x, box.y)
+        const menuWidth = box.x - box.width * 8
+        const menuHeight = box.y + box.width * 8
 
-    // border
-    ctx.lineTo(box.x + size, box.y)
-    ctx.lineTo(box.x + size, box.y + size)
-    ctx.lineTo(box.x, box.y + size)
-    ctx.lineTo(box.x, box.y)
+        // background
+        ctx.fillStyle = config.uiBackgroundColor
+        ctx.fillRect(menuWidth, box.y, box.width * 9, menuHeight - box.y)
 
-    // 3 inner lines
-    for (let i = 0; i < 3; i++) {
-        ctx.moveTo(box.x + size * 0.2, box.y + size * i / 5 + size * 0.3)
-        ctx.lineTo(box.x + size * 0.8, box.y + size * i / 5 + size * 0.3)
+        // foreground
+        ctx.beginPath()
+        ctx.moveTo(menuWidth, box.y)
+
+        // menu 
+        ctx.lineTo(box.x + box.width, box.y)
+        ctx.lineTo(box.x + box.width, menuHeight)
+        ctx.lineTo(menuWidth, menuHeight)
+        ctx.lineTo(menuWidth, box.y)
+
+        ctx.fillStyle = config.uiForegroundColor
+
+        const configLables = [
+            "starCount",
+            "starSpeed",
+            "starSize",
+            "starColor",
+            "backgroundColor",
+            "uiForegroundColor",
+            "uiBackgroundColor",
+            "lineColor",
+            "lineDistance",
+        ]
+
+        let starCount = document.createElement('input')
+        let starSpeed = document.createElement('input')
+        let starSize = document.createElement('input')
+        let starColor = document.createElement('input')
+        let backgroundColor = document.createElement('input')
+        let uiForegroundColor = document.createElement('input')
+        let uiBackgroundColor = document.createElement('input')
+        let lineColor = document.createElement('input')
+        let lineDistance = document.createElement('input')
+
+
+        for (let i = 0; i < 9; i++) {
+            const lable = configLables[i]
+            ctx.font = "22px Arial"
+            ctx.fillText(`${lable}: ${config[lable]}`, menuWidth + size, box.y + box.width * i * 5 / 8 + size)
+
+        }
+
+        ctx.strokeStyle = 'green'
+        ctx.stroke()
+        ctx.closePath()
+
+    } else {
+
+        // background
+        ctx.fillStyle = config.backgroundColor
+        ctx.fillRect(box.x, box.y, box.width, box.width)
+
+        // foreground
+        ctx.beginPath()
+        ctx.moveTo(box.x, box.y)
+
+        // border
+        ctx.lineTo(box.x + box.width, box.y)
+        ctx.lineTo(box.x + box.width, box.y + box.width)
+        ctx.lineTo(box.x, box.y + box.width)
+        ctx.lineTo(box.x, box.y)
+
+        // 3 inner lines
+        for (let i = 0; i < 3; i++) {
+            ctx.moveTo(box.x + box.width * 0.2, box.y + box.width * i / 5 + box.width * 0.3)
+            ctx.lineTo(box.x + box.width * 0.8, box.y + box.width * i / 5 + box.width * 0.3)
+        }
+
+        ctx.strokeStyle = config.foregroundColor
+        ctx.stroke()
+        ctx.closePath()
+
     }
-
-    ctx.strokeStyle = foregroundColor
-    ctx.stroke()
-    ctx.closePath()
+    return box
 }
 
-export function drawCanvas(stars, config) {
+export function drawCanvas(stars, clickedUI, config) {
     refreshCanvas(config.backgroundColor)
 
     stars.forEach(star => {
@@ -87,5 +148,5 @@ export function drawCanvas(stars, config) {
         drawLine(stars, star.x, star.y, config.lineColor, config.lineDistance) // minimum distance#
     })
 
-    drawUI(50, 0.1, config.uiForegroundColor, config.uiBackgroundColor)
+    return drawUI(50, 0.1, clickedUI, config)
 }

@@ -4,7 +4,7 @@ let defaultStarSize = 3;
 let defaultStarColor = 'ghostwhite';
 let defaultBackgroundColor = '#040720';
 let defaultUIForegroundColor = '#1221a1';
-let defaultUIBackgroundColor = '#04072080'; // 50% transparency 
+let defaultUIBackgroundColor = defaultBackgroundColor + 'A0' // + transparency 
 let defaultLineColor = 'blue';
 let defaultLineDistance = 250;
 
