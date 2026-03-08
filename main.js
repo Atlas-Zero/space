@@ -24,13 +24,15 @@ let box = {}
 let visible = false
 
 function main() {
-    config = updateWallpaperConfig()
-
     handleStars(stars, prevSpeed, config)
     box = drawCanvas(stars, visible, config)
 
     // update star speed if user changes value
     prevSpeed = config.starSpeed
+
+    inputs.forEach((input, idx) => {
+        config[configLabels[idx]] = input.value
+    })
 }
 
 main()
