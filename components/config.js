@@ -3,6 +3,8 @@ let defaultStarSpeed = 1.5;
 let defaultStarSize = 3;
 let defaultStarColor = 'ghostwhite';
 let defaultBackgroundColor = '#040720';
+let defaultUIForegroundColor = '#1221a1';
+let defaultUIBackgroundColor = '#04072080'; // 50% transparency 
 let defaultLineColor = 'blue';
 let defaultLineDistance = 250;
 
@@ -50,10 +52,12 @@ export function updateWallpaperConfig() {
         starSize: defaultStarSize,
         starColor: defaultStarColor,
         backgroundColor: defaultBackgroundColor,
+        uiForegroundColor: defaultUIForegroundColor,
+        uiBackgroundColor: defaultUIBackgroundColor,
         lineColor: defaultLineColor,
         lineDistance: defaultLineDistance
     };
 
-    console.log('Updated wallpaper config:', config);
+    // console.log('Updated wallpaper config:', config);
     return config
 }
