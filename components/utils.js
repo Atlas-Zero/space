@@ -20,3 +20,10 @@ export function inBoxBounds(box, x, y) {
 
     return withinX && withinY
 }
+
+export function inExtendedBounds(box, x, y) {
+    let withinX = x > box.x - box.width * 8 && x < box.x + box.width
+    let withinY = y > box.y && y < box.y + box.width * 8
+
+    return withinX && withinY
+}
