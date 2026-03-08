@@ -38,7 +38,7 @@ function drawLine(stars, origX, origY, color, dist) {
 }
 
 function drawUI(size, offsetPercent, visible, config) {
-
+    // box{position}
     const box = {
         x: canvas.width - canvas.width * offsetPercent,
         y: canvas.height * offsetPercent,
@@ -49,7 +49,6 @@ function drawUI(size, offsetPercent, visible, config) {
     ctx.fillStyle = config.uiBackgroundColor
 
     if (visible) {
-
         const menuWidth = box.x - box.width * 8
         const menuHeight = box.y + box.width * 8
 
@@ -78,9 +77,7 @@ function drawUI(size, offsetPercent, visible, config) {
 
             config[label] = input.value
         }
-
     } else {
-
         // refresh
         for (let i = 0; i < 9; i++) {
             const label = configLabels[i]

@@ -22,13 +22,7 @@ function deleteStars(stars) {
     stars.pop()
 }
 
-export function handleStars(stars, prevSpeed, config) {
-
-    // reset stars if speed changes
-    if (prevSpeed != config.starSpeed) {
-        stars = []
-    }
-
+export function handleStars(stars, config) {
     while (stars.length < config.starCount) {
         createStars(stars, config.starSpeed)
     }
@@ -36,5 +30,4 @@ export function handleStars(stars, prevSpeed, config) {
     while (stars.length > config.starCount) {
         deleteStars(stars)
     }
-
 }

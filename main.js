@@ -17,18 +17,14 @@ inputs.forEach((input, idx) => {
 
 // stars
 let stars = []
-let prevSpeed = 1
 
 // ui
 let box = {}
 let visible = false
 
 function main() {
-    handleStars(stars, prevSpeed, config)
+    handleStars(stars, config)
     box = drawCanvas(stars, visible, config)
-
-    // update star speed if user changes value
-    prevSpeed = config.starSpeed
 
     inputs.forEach((input, idx) => {
         config[configLabels[idx]] = input.value
