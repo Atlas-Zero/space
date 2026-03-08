@@ -20,7 +20,7 @@ let stars = []
 
 // ui
 let box = {}
-let visible = false
+let visible = true
 
 function main() {
     handleStars(stars, config)
