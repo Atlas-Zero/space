@@ -1,7 +1,10 @@
 import { inXBounds, inYBounds } from './utils.js'
+import { updateWallpaperConfig } from './config.js'
+import { configLabels } from './inputs.js'
 
 const canvas = document.querySelector('#space')
 const ctx = canvas.getContext('2d')
+const config = updateWallpaperConfig()
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
@@ -36,7 +39,7 @@ function drawLine(stars, origX, origY, color, dist) {
     })
 }
 
-function drawUI(size, offsetPercent, clickedUI, config) {
+function drawUI(size, offsetPercent, visible) {
 
     const box = {
         x: canvas.width - canvas.width * offsetPercent,
@@ -44,17 +47,18 @@ function drawUI(size, offsetPercent, clickedUI, config) {
         width: size,
     }
 
-    if (clickedUI) {
+    ctx.beginPath()
+    ctx.fillStyle = config.uiBackgroundColor
+
+    if (visible) {
 
         const menuWidth = box.x - box.width * 8
         const menuHeight = box.y + box.width * 8
 
         // background
-        ctx.fillStyle = config.uiBackgroundColor
         ctx.fillRect(menuWidth, box.y, box.width * 9, menuHeight - box.y)
 
         // foreground
-        ctx.beginPath()
         ctx.moveTo(menuWidth, box.y)
 
         // menu 
@@ -63,50 +67,35 @@ function drawUI(size, offsetPercent, clickedUI, config) {
         ctx.lineTo(menuWidth, menuHeight)
         ctx.lineTo(menuWidth, box.y)
 
-        ctx.fillStyle = config.uiForegroundColor
-
-        const configLables = [
-            "starCount",
-            "starSpeed",
-            "starSize",
-            "starColor",
-            "backgroundColor",
-            "uiForegroundColor",
-            "uiBackgroundColor",
-            "lineColor",
-            "lineDistance",
-        ]
-
-        let starCount = document.createElement('input')
-        let starSpeed = document.createElement('input')
-        let starSize = document.createElement('input')
-        let starColor = document.createElement('input')
-        let backgroundColor = document.createElement('input')
-        let uiForegroundColor = document.createElement('input')
-        let uiBackgroundColor = document.createElement('input')
-        let lineColor = document.createElement('input')
-        let lineDistance = document.createElement('input')
-
-
         for (let i = 0; i < 9; i++) {
-            const lable = configLables[i]
-            ctx.font = "22px Arial"
-            ctx.fillText(`${lable}: ${config[lable]}`, menuWidth + size, box.y + box.width * i * 5 / 8 + size)
+            const label = configLabels[i]
+            const input = document.getElementById(label)
+            input.hidden = false
+            input.style.left = menuWidth + size * 5 + "px";
+            input.style.top = (box.y + box.width * i * 6 / 8 + size * 0.8 - 10) + "px";
+            input.style.color = config.uiForegroundColor
+            ctx.font = "22px Arial";
+            ctx.fillStyle = config.uiForegroundColor
+            ctx.fillText(`${label}: `, menuWidth + size, box.y + box.width * i * 6 / 8 + size);
 
+            config[label] = input.value
         }
 
-        ctx.strokeStyle = 'green'
-        ctx.stroke()
-        ctx.closePath()
+        ctx.fillStyle = config.uiForegroundColor
 
     } else {
 
+        // refresh
+        for (let i = 0; i < 9; i++) {
+            const label = configLabels[i]
+            const input = document.getElementById(label)
+            input.hidden = true
+        }
+
         // background
-        ctx.fillStyle = config.backgroundColor
         ctx.fillRect(box.x, box.y, box.width, box.width)
 
         // foreground
-        ctx.beginPath()
         ctx.moveTo(box.x, box.y)
 
         // border
@@ -120,16 +109,16 @@ function drawUI(size, offsetPercent, clickedUI, config) {
             ctx.moveTo(box.x + box.width * 0.2, box.y + box.width * i / 5 + box.width * 0.3)
             ctx.lineTo(box.x + box.width * 0.8, box.y + box.width * i / 5 + box.width * 0.3)
         }
-
-        ctx.strokeStyle = config.foregroundColor
-        ctx.stroke()
-        ctx.closePath()
-
     }
+
+    ctx.strokeStyle = config.uiForegroundColor
+    ctx.stroke()
+    ctx.closePath()
+
     return box
 }
 
-export function drawCanvas(stars, clickedUI, config) {
+export function drawCanvas(stars, visible, config) {
     refreshCanvas(config.backgroundColor)
 
     stars.forEach(star => {
@@ -145,8 +134,8 @@ export function drawCanvas(stars, clickedUI, config) {
 
         // draw
         drawStar(star.x, star.y, config.starColor, config.starSize)
-        drawLine(stars, star.x, star.y, config.lineColor, config.lineDistance) // minimum distance#
+        drawLine(stars, star.x, star.y, config.lineColor, config.lineDistance) // minimum distance
     })
 
-    return drawUI(50, 0.1, clickedUI, config)
+    return drawUI(50, 0.1, visible, config)
 }

@@ -61,3 +61,15 @@ export function updateWallpaperConfig() {
     // console.log('Updated wallpaper config:', config);
     return config
 }
+
+export const configLabels = [
+    "starCount",
+    "starSpeed",
+    "starSize",
+    "starColor",
+    "backgroundColor",
+    "uiForegroundColor",
+    "uiBackgroundColor",
+    "lineColor",
+    "lineDistance",
+]
