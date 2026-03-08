@@ -20,7 +20,7 @@ let stars = []
 
 // ui
 let box = {}
-let visible = true
+let visible = false
 
 function main() {
     handleStars(stars, config)
@@ -32,7 +32,7 @@ function main() {
 }
 
 main()
-window.addEventListener('click', (ev) => {
+document.addEventListener('click', (ev) => {
     visible = (visible) ? inExtendedBounds(box, ev.x, ev.y) : inBoxBounds(box, ev.x, ev.y);
 })
 
