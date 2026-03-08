@@ -6,7 +6,7 @@ const ctx = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-export function refreshCanvas(backgroundColor) {
+function refreshCanvas(backgroundColor) {
     ctx.fillStyle = backgroundColor
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -62,6 +62,8 @@ function drawBox(size, offsetPercent, foregroundColor, backgroundColor) {
 }
 
 export function drawCanvas(stars, config) {
+    refreshCanvas(config.backgroundColor)
+
     stars.forEach(star => {
         // collision
         star.x += star.vx
@@ -77,6 +79,7 @@ export function drawCanvas(stars, config) {
         drawStar(star.x, star.y, config.starColor, config.starSize)
         drawLine(stars, star.x, star.y, config.lineColor, config.lineDistance) // minimum distance#
     })
+
     // ui
     drawBox(50, 0.1, config.uiForegroundColor, config.uiBackgroundColor)
 }

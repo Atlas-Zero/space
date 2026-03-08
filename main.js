@@ -1,5 +1,5 @@
 import { updateWallpaperConfig } from './components/config.js'
-import { refreshCanvas, drawCanvas } from './components/ui.js'
+import { drawCanvas } from './components/ui.js'
 import { Star } from './components/star.js'
 import { randVel } from './components/utils.js'
 
@@ -7,10 +7,8 @@ let stars = []
 let prevSpeed = 1
 
 function main() {
-
     // load config
     const config = updateWallpaperConfig()
-    refreshCanvas(config.backgroundColor)
 
     // reset stars if speed changes
     if (prevSpeed != config.starSpeed) {
