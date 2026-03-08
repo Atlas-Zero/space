@@ -1,10 +1,8 @@
 import { inXBounds, inYBounds } from './utils.js'
-import { updateWallpaperConfig } from './config.js'
 import { configLabels } from './inputs.js'
 
 const canvas = document.querySelector('#space')
 const ctx = canvas.getContext('2d')
-const config = updateWallpaperConfig()
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
@@ -39,7 +37,7 @@ function drawLine(stars, origX, origY, color, dist) {
     })
 }
 
-function drawUI(size, offsetPercent, visible) {
+function drawUI(size, offsetPercent, visible, config) {
 
     const box = {
         x: canvas.width - canvas.width * offsetPercent,
@@ -80,8 +78,6 @@ function drawUI(size, offsetPercent, visible) {
 
             config[label] = input.value
         }
-
-        ctx.fillStyle = config.uiForegroundColor
 
     } else {
 
