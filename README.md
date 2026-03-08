@@ -1,8 +1,12 @@
 # Space
 
-A simple background created with the power of JavaScript, HTML & CSS.
+A dynamic desktop wallpaper created with the pure power of JavaScript, HTML & CSS.
 
-This background is now available on [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3589181971) for [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/)!
+## Windows
+This background is now available on [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3589181971) for [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/)
+
+## Linux
+Use a wallpaper manager like [Komorebi](https://github.com/christianloopp/komorebi), that supports web wallpapers
 
 ## technologies
 - HTML
@@ -11,7 +15,7 @@ This background is now available on [Steam](https://steamcommunity.com/sharedfil
 - Wallpaper Engine API
 
 ## function
-- Blackblue Background
-- white dots (x, y, vx, vy) moving in a random direction
-- when dots are in a certain range to another, they connect through a line
+- built to maximize configurablity, freedom of expression
+- stars bouce chaotically through space in a random direction, with random speed
+- when stars they connect with another, if they are in a certain range to another
 - looks pleasing
