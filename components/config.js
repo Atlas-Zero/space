@@ -1,12 +1,12 @@
-let defaultStarCount = 50;
-let defaultStarSpeed = 1.5;
+let defaultStarCount = 200;
+let defaultStarSpeed = 0.2;
 let defaultStarSize = 3;
 let defaultStarColor = 'red';
 let defaultBackgroundColor = '#040720';
 let defaultUIForegroundColor = 'green';
 let defaultUIBackgroundColor = defaultBackgroundColor + 'A0' // + transparency 
-let defaultLineColor = 'blue';
-let defaultLineDistance = 250;
+let defaultLineColor = '#ff000020';
+let defaultLineDistance = 300;
 
 window.wallpaperPropertyListener = {
     applyUserProperties: function (properties) {
