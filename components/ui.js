@@ -36,7 +36,7 @@ function drawLine(stars, origX, origY, color, dist) {
     })
 }
 
-function drawBox(size, offsetPercent, foregroundColor, backgroundColor) {
+function drawUI(size, offsetPercent, foregroundColor, backgroundColor) {
 
     const box = {
         x: canvas.width - canvas.width * offsetPercent,
@@ -47,14 +47,21 @@ function drawBox(size, offsetPercent, foregroundColor, backgroundColor) {
     ctx.fillStyle = backgroundColor
     ctx.fillRect(box.x, box.y, size, size)
 
-    // border
+    // foreground
     ctx.beginPath()
     ctx.moveTo(box.x, box.y)
 
+    // border
     ctx.lineTo(box.x + size, box.y)
     ctx.lineTo(box.x + size, box.y + size)
     ctx.lineTo(box.x, box.y + size)
     ctx.lineTo(box.x, box.y)
+
+    // 3 inner lines
+    for (let i = 0; i < 3; i++) {
+        ctx.moveTo(box.x + size * 0.2, box.y + size * i / 5 + size * 0.3)
+        ctx.lineTo(box.x + size * 0.8, box.y + size * i / 5 + size * 0.3)
+    }
 
     ctx.strokeStyle = foregroundColor
     ctx.stroke()
@@ -80,6 +87,5 @@ export function drawCanvas(stars, config) {
         drawLine(stars, star.x, star.y, config.lineColor, config.lineDistance) // minimum distance#
     })
 
-    // ui
-    drawBox(50, 0.1, config.uiForegroundColor, config.uiBackgroundColor)
+    drawUI(50, 0.1, config.uiForegroundColor, config.uiBackgroundColor)
 }
