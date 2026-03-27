@@ -17,5 +17,5 @@ Use a wallpaper manager like [Komorebi](https://github.com/christianloopp/komore
 ## function
 - built to maximize configurablity, freedom of expression
 - stars bouce chaotically through space in a random direction, with random speed
-- when stars they connect with another, if they are in a certain range to another
+- stars connect, if they are in a certain range to each other
 - looks pleasing
