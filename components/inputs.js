@@ -12,7 +12,7 @@ export const configLabels = [
     'lineDistance',
 ]
 
-export function initInputs(config) {
+export function initUIinputs(config) {
     overlay.innerHTML = '';
 
     const inputs = [];
@@ -31,4 +31,14 @@ export function initInputs(config) {
     }
 
     return inputs
+}
+
+export function initURLinputs(config) {
+    const params = new URLSearchParams(window.location.search);
+    for (const [key, value] of params.entries()) {
+        // console.log("Key is: " + key);
+        // console.log("Value is: " + value);
+        config[key] = value
+    }
+    return params
 }
